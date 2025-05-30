@@ -42,13 +42,9 @@ const createStation = asyncHandler(async (req, res, next) => {
 // @route   GET /api/stations
 // @access  Private
 const getAllStations = asyncHandler(async (req, res, next) => {
-  // Find stations created by the currently logged-in user
-  const stations = await Station.find({ createdBy: req.user._id }).populate(
-    "createdBy",
-    "email"
-  );
-  // .populate('createdBy', 'email') will replace createdBy ID with user object having only email
-  // If you want all user fields (except password): .populate('createdBy')
+  // Find ALL stations, but still populate createdBy to know who made it
+  const stations = await Station.find({}).populate("createdBy", "email name"); // Added 'name' to populate if you have it
+  // Or just .populate('createdBy') to get all user fields (except password)
 
   res.status(200).json({
     success: true,
