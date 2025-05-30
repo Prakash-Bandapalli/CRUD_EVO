@@ -65,13 +65,6 @@ const getStationById = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Authorization: Check if the logged-in user is the owner of the station
-  if (station.createdBy.toString() !== req.user._id.toString()) {
-    return next(
-      new ApiError(403, "User not authorized to access this station") // 403 Forbidden
-    );
-  }
-
   res.status(200).json({
     success: true,
     data: station,
@@ -87,13 +80,6 @@ const updateStation = asyncHandler(async (req, res, next) => {
   if (!station) {
     return next(
       new ApiError(404, `Station not found with id of ${req.params.id}`)
-    );
-  }
-
-  // Authorization: Check if the logged-in user is the owner of the station
-  if (station.createdBy.toString() !== req.user._id.toString()) {
-    return next(
-      new ApiError(403, "User not authorized to update this station")
     );
   }
 
@@ -133,13 +119,6 @@ const deleteStation = asyncHandler(async (req, res, next) => {
   if (!station) {
     return next(
       new ApiError(404, `Station not found with id of ${req.params.id}`)
-    );
-  }
-
-  // Authorization: Check if the logged-in user is the owner of the station
-  if (station.createdBy.toString() !== req.user._id.toString()) {
-    return next(
-      new ApiError(403, "User not authorized to delete this station")
     );
   }
 
