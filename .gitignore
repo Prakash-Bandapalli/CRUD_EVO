@@ -23,6 +23,8 @@ backend/.env
 frontend/.env
 frontend/.env.local
 frontend/.env.*.local
+frontend/.env.development
+frontend/.env.production
 
 # Build outputs
 dist/
