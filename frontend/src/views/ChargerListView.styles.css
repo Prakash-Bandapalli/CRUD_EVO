@@ -1,0 +1,370 @@
+.charger-layout-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-light-gray);
+}
+.map-panel {
+  flex: 0 0 65%; /* Map takes 65% */
+  height: 100%;
+  position: relative;
+  background-color: #e9ecef; /* Fallback if map tiles are slow */
+}
+.map-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.1rem;
+  color: var(--color-soft-text);
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+.error-text {
+  color: var(--color-danger);
+}
+
+.sidebar-panel {
+  flex: 0 0 35%; /* Sidebar takes 35% */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border-left: 1px solid var(--color-border);
+  overflow: hidden; /* Prevent this panel from showing scrollbars */
+}
+.sidebar-content {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Full height of sidebar-panel */
+}
+.sidebar-fixed-content {
+  flex-shrink: 0; /* This content (filters, details) should not shrink */
+  margin-bottom: var(--spacing-lg);
+}
+
+.card-title {
+  font-size: 1.1rem; /* Specific to cards in this view */
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.toggle-filters-section {
+  margin-bottom: var(--spacing-md);
+}
+.toggle-filters-btn {
+  width: 100%;
+  justify-content: space-between; /* For text and icon */
+  text-align: left;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+}
+.filter-icon {
+  font-size: 0.8em;
+}
+
+.filters-card {
+  padding: var(--spacing-md); /* Adjust padding for filter card */
+}
+.filter-form .filter-input-row {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens if necessary */
+  gap: var(--spacing-md); /* Gap between input groups */
+  align-items: flex-end;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100px; /* Allow shrinking, with a smaller base */
+  min-width: 90px; /* Prevent extreme squishing */
+}
+
+.form-control-sm {
+  font-size: 0.85rem;
+  padding: var(--spacing-sm) 0.6rem;
+}
+
+.filter-button-row {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  justify-content: flex-start;
+}
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+.clear-filters-btn.btn-sm {
+  font-size: 1rem; /* For the '✕' character */
+  line-height: 1; /* To align '✕' better */
+  padding: 0.4rem 0.6rem;
+}
+
+.add-station-global {
+  margin-bottom: var(--spacing-lg);
+}
+.global-add-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2); /* Green shadow */
+}
+.global-add-btn .plus-icon {
+  font-size: 1.2em;
+  margin-right: var(--spacing-sm);
+}
+
+.selected-station-details-section.card {
+  border-left: 4px solid var(--color-primary);
+  background-color: #e6f2ff; /* Light blue tint for selected */
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+.selected-station-details-section .card-title {
+  color: var(--color-primary-hover);
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.details-content p {
+  margin: var(--spacing-xs) 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.details-content p strong {
+  font-weight: 600;
+}
+.details-content em {
+  color: var(--color-medium-text);
+  font-style: normal;
+}
+.creator-info {
+  font-size: 0.85rem;
+  color: var(--color-medium-text);
+  margin-top: var(--spacing-sm);
+}
+.created-by-me {
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+.item-actions {
+  margin-top: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+}
+
+.no-selection-message.card {
+  text-align: center;
+  color: var(--color-soft-text);
+  font-style: italic;
+  font-size: 0.9rem;
+  border-style: dashed;
+  background-color: var(--color-light-gray);
+}
+
+.list-card.condensed-list-section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Important: Parent controls overflow */
+  padding: 0;
+  margin-top: 0;
+}
+.list-card .card-title.list-title {
+  padding: var(--spacing-md) var(--spacing-lg) 0 var(--spacing-lg);
+  margin-bottom: var(--spacing-sm); /* Title should not shrink */
+}
+.station-count {
+  font-size: 0.85em;
+  font-weight: 400;
+  color: var(--color-soft-text);
+}
+.loading-sidebar,
+.no-stations-sidebar {
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-style: italic;
+  color: var(--color-soft-text);
+  font-size: 0.9rem;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.error-message.small-error {
+  font-size: 0.9rem;
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+}
+
+.station-list-condensed {
+  list-style-type: none;
+  padding: 0 var(--spacing-lg) var(--spacing-sm) var(--spacing-lg);
+  margin: 0;
+  overflow-y: auto; /* Make the UL scrollable */
+  flex-grow: 1;
+}
+.station-list-item {
+  padding: var(--spacing-sm) 0; /* Vertical padding only */
+  border-bottom: 1px solid #f0f0f2; /* Very light item separator */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.15s ease, border-left-color 0.15s ease;
+  font-size: 0.9rem;
+  border-left: 4px solid transparent; /* For selected state */
+  margin-left: calc(-1 * var(--spacing-lg));
+  margin-right: calc(-1 * var(--spacing-lg));
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+.station-list-item:last-child {
+  border-bottom: none;
+}
+.station-list-item:hover {
+  background-color: #f0f6ff; /* Light blue hover */
+}
+.station-list-item.selected {
+  background-color: var(--selected-bg, #e6f2ff);
+  border-left-color: var(--selected-border, var(--color-primary));
+  color: var(--color-primary-hover);
+}
+.station-item-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-right: var(--spacing-sm);
+  overflow: hidden;
+}
+.station-name {
+  font-weight: 500;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.station-list-item.selected .station-name {
+  font-weight: 600;
+}
+.station-power {
+  font-size: 0.8rem;
+  color: var(--color-medium-text);
+}
+.station-status-badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  min-width: 70px;
+  text-align: center;
+  flex-shrink: 0;
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+
+.station-status-badge.status-active {
+  background-color: var(--status-active-bg);
+  color: var(--status-active-text);
+  border-color: var(--status-active-border);
+}
+.station-status-badge.status-inactive {
+  background-color: var(--status-inactive-bg);
+  color: var(--status-inactive-text);
+  border-color: var(--status-inactive-border);
+}
+.station-status-badge.status-under-maintenance {
+  background-color: var(--status-maintenance-bg);
+  color: var(--status-maintenance-text);
+  border-color: var(--status-maintenance-border);
+}
+.station-status-badge.status-coming-soon {
+  background-color: var(--status-coming-soon-bg);
+  color: var(--status-coming-soon-text);
+  border-color: var(--status-coming-soon-border);
+}
+
+/* Status Text in Details Panel */
+.detail-status-text {
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+  display: inline-block;
+}
+.detail-status-text.status-active {
+  color: var(--status-active-text);
+  background-color: var(--status-active-bg);
+}
+.detail-status-text.status-inactive {
+  color: var(--status-inactive-text);
+  background-color: var(--status-inactive-bg);
+}
+.detail-status-text.status-under-maintenance {
+  color: var(--status-maintenance-text);
+  background-color: var(--status-maintenance-bg);
+}
+.detail-status-text.status-coming-soon {
+  color: var(--status-coming-soon-text);
+  background-color: var(--status-coming-soon-bg);
+}
+
+/* Action buttons in details will use .btn .btn-warning .btn-danger .btn-sm */
+.action-btn.btn-sm {
+  font-size: 1rem;
+  padding: 0.35rem 0.7rem;
+}
+
+/* Vue Transition for Filters */
+.fade-slide-fast-enter-active,
+.fade-slide-fast-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.25s ease-out;
+  overflow: hidden;
+}
+.fade-slide-fast-enter-from,
+.fade-slide-fast-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+  max-height: 0px;
+}
+.fade-slide-fast-enter-to,
+.fade-slide-fast-leave-from {
+  max-height: 150px; /* Adjust based on actual filter content height */
+}
+
+.action-in-progress-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+.details-content.content-busy > *:not(.actions),
+.station-list-item.item-busy > *:not(.actions-placeholder-if-any) {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.map-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
