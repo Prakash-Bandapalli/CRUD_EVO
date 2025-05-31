@@ -1,87 +1,108 @@
+# EV Charging Station - Complete Setup Guide
+
+## 🌐 Live Application Links
+
+- **Frontend (Live)**: https://charging-station-orpin.vercel.app/
+- **Backend API (Live)**: https://charging-station-ckr1.onrender.com/
+
+---
+
+## 🚀 Local Development Setup
+
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local installation or MongoDB Atlas account)
+- Git
+
 ### Backend Setup (Node.js API)
 
-1.  **Clone the Repository:**
-    Open your terminal and clone the project:
-    ```bash
-    git clone https://github.com/Prakash-Bandapalli/charging-station.git
-    ```
+#### 1. Clone the Repository
+```bash
+git clone https://github.com/Prakash-Bandapalli/charging-station.git
+cd charging-station
+```
 
-2.  **Navigate to the Backend Directory:**
-    ```bash
-    cd charging-station/backend
-    ```
+#### 2. Navigate to Backend Directory
+```bash
+cd backend
+```
 
-3.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
+#### 3. Install Dependencies
+```bash
+npm install
+```
 
-4.  **Create and Configure Backend Environment Variables:**
-    *   In the `charging-station/backend/` directory, create a new file named `.env`.
-    *   Paste the following content into this `backend/.env` file. **You must adjust the `MONGO_URI` and `JWT_SECRET` values to match your local setup.**
+#### 4. Create Backend Environment Variables
+Create a `.env` file in the `charging-station/backend/` directory with the following content:
 
-    ```env
-    # charging-station/backend/.env
+```env
+# charging-station/backend/.env
+PORT=5000
+NODE_ENV=development
 
-    PORT=5000
-    NODE_ENV=development
-    MONGO_URI=mongodb://localhost:27017/ev_charger_db_local
-    # If using MongoDB Atlas for local development, replace the above MONGO_URI with your Atlas connection string, for example:
-    # MONGO_URI=mongodb+srv://<your_username>:<your_password>@<your_cluster_url>/<your_database_name>?retryWrites=true&w=majority
+# Local MongoDB URI
+MONGO_URI=mongodb://localhost:27017/ev_charger_db_local
 
-    JWT_SECRET=REPLACE_THIS_WITH_A_VERY_STRONG_RANDOM_SECRET_KEY_AT_LEAST_32_CHARACTERS
-    # (For example, you can generate one using an online tool or a command like `openssl rand -base64 32`)
+# For MongoDB Atlas (replace with your credentials):
+# MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority
 
-    JWT_EXPIRES_IN=1d
+# Generate a strong JWT secret (use: openssl rand -base64 32)
+JWT_SECRET=your_super_secret_jwt_key_at_least_32_characters_long_replace_this
 
-    # This should be the URL your local Vue.js dev server will run on.
-    # Default for Vue CLI is often 8080. Adjust if yours is different (e.g., 8081).
-    FRONTEND_URL=http://localhost:8080
-    ```
-    *   **Critical:**
-        *   Replace `REPLACE_THIS_WITH_A_VERY_STRONG_RANDOM_SECRET_KEY_AT_LEAST_32_CHARACTERS` with your own unique, random string.
-        *   Update `MONGO_URI` if you are using MongoDB Atlas or a different local database name/setup.
-        *   Verify `FRONTEND_URL` matches the port your Vue development server will use (usually `http://localhost:8080` or `http://localhost:8081`).
+# JWT expiration
+JWT_EXPIRES_IN=1d
 
-5.  **Run the Backend Development Server:**
-    ```bash
-    npm run dev
-    ```
-    The backend API should now be running, typically on `http://localhost:5000`. Check your terminal for a "MongoDB Connected" message and to ensure there are no startup errors.
+# Frontend URL for CORS
+FRONTEND_URL=http://localhost:8080
+```
+
+**⚠️ Important Configuration Notes:**
+- Replace `your_super_secret_jwt_key_at_least_32_characters_long_replace_this` with a strong, random secret
+- Update `MONGO_URI` if using MongoDB Atlas or different local settings
+- Ensure `FRONTEND_URL` matches your Vue.js dev server port
+
+#### 5. Start Backend Development Server
+```bash
+npm run dev
+```
+
+✅ Backend should be running at `http://localhost:5000`  
+Look for "MongoDB Connected" message in the terminal.
 
 ---
 
 ### Frontend Setup (Vue.js UI)
 
-1.  **Navigate to the Frontend Directory:**
-    Open a **new terminal window/tab** (ensure your backend server is still running in its own terminal).
-    ```bash
-    cd charging-station/frontend
-    ```
-    *(If you are currently in the `charging-station/backend/` directory, you can use: `cd ../frontend`)*
+#### 1. Navigate to Frontend Directory
+**Open a new terminal window** (keep backend running) and navigate to frontend:
 
-2.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
+```bash
+cd charging-station/frontend
+```
 
-3.  **Configure Frontend Environment Variables:**
-    *   In the `charging-station/frontend/` directory, create a new file named `.env.development`.
-    *   Add the following content to this `frontend/.env.development` file, ensuring the URL points to your **locally running backend API**:
+#### 2. Install Dependencies
+```bash
+npm install
+```
 
-    ```env
-    # charging-station/frontend/.env.development
+#### 3. Create Frontend Environment Variables
+Create a `.env.development` file in the `charging-station/frontend/` directory:
 
-    VUE_APP_API_BASE_URL=http://localhost:5000/api
-    ```
-    *(This tells your local Vue development server where to send API requests. The port `5000` should match the `PORT` in your backend's `.env` file).*
+```env
+# charging-station/frontend/.env.development
 
-4.  **Run the Frontend Development Server:**
-    ```bash
-    npm run serve
-    ```
-    The Vue.js application will compile, and a development server will start. The terminal output will show the URL where the frontend is accessible (commonly `http://localhost:8080` or `http://localhost:8081`). Open this URL in your web browser.
+# For local development (backend running on localhost:5000)
+VUE_APP_API_BASE_URL=http://localhost:5000/api
+
+# Alternative: Use live backend for testing
+# VUE_APP_API_BASE_URL=https://charging-station-ckr1.onrender.com/api
+```
+
+#### 4. Start Frontend Development Server
+```bash
+npm run serve
+```
+
+✅ Frontend will be available at `http://localhost:8080` or `http://localhost:8081`
 
 ---
-
-You should now have both the backend API and the frontend UI running locally, configured to communicate with each other.
