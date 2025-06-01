@@ -1,4 +1,3 @@
-// models/station.model.js
 const mongoose = require("mongoose");
 
 const stationSchema = new mongoose.Schema(
@@ -37,7 +36,6 @@ const stationSchema = new mongoose.Schema(
         },
       },
       address: {
-        // Optional: A human-readable address string
         type: String,
         trim: true,
       },
@@ -61,31 +59,23 @@ const stationSchema = new mongoose.Schema(
     connectorType: {
       type: String,
       required: [true, "Please specify the connector type"],
-      // Consider using an enum if you have a predefined list of connector types
-      // enum: ['Type 1 (J1772)', 'Type 2 (Mennekes)', 'CCS Combo 1', 'CCS Combo 2', 'CHAdeMO', 'Tesla (NACS)', 'Other'],
+
       trim: true,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // This creates a reference to the User model
-      required: true, // Every station must be associated with a user who created it
+      ref: "User",
+      required: true,
     },
-    // You could add more fields like:
-    // - pricing (String or Object)
-    // - amenities (Array of Strings)
-    // - images (Array of Strings - URLs)
-    // - operatingHours (String)
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 
 // Create a 2dsphere index on the location.coordinates field for geospatial queries
-// This is important if you plan to do things like "find stations near a point"
 stationSchema.index({ "location.coordinates": "2dsphere" });
 
-// Compile the schema into a model
 const Station = mongoose.model("Station", stationSchema);
 
 module.exports = Station;

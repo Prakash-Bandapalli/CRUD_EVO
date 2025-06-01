@@ -1,4 +1,3 @@
-// routes/auth.routes.js
 const express = require("express");
 const { registerUser, loginUser } = require("../controllers/auth.controller");
 

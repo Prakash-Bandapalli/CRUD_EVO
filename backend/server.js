@@ -1,9 +1,8 @@
-// server.js
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
-const { startKeepAlive, stopKeepAlive } = require("./utils/keepAlive"); // Adjust path
+const { startKeepAlive, stopKeepAlive } = require("./utils/keepAlive");
 
 const authRoutes = require("./routes/auth.routes");
 const stationRoutes = require("./routes/station.routes");
@@ -13,31 +12,25 @@ dotenv.config();
 connectDB();
 const app = express();
 
-// --- CORS Configuration ---
-// Define allowed origins
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  "http://localhost:8080", // Example: Vue CLI default local port
-  "http://localhost:5173", // Example: Vite default local port
+  "http://localhost:8080", // Vue CLI default local port
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    // OR if origin is in allowedOrigins
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true, // If your frontend needs to send cookies or authorization headers
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
-// --- End CORS Configuration ---
 
-startKeepAlive(); // Start Keep Alive service
+startKeepAlive();
 
 app.use(express.json());
 
