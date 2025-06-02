@@ -31,7 +31,7 @@
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/Prakash-Bandapalli/charging-station.git
+git clone https://github.com/Prakash-Bandapalli/CRUD_EVO.git
 cd charging-station
 ```
 
